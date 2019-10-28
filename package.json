@@ -1,6 +1,6 @@
 {
   "name": "@broadstone/google-cloud-file-service",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This package allows the creation of signed urls to enable uploads, to move files, and to generate download urls for services",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
