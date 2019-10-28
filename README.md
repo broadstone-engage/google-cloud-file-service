@@ -2,7 +2,7 @@
 
 This is to prevent lightweight services from having to intake file data in order to store the files, instead we offload this work to google and we simply reference the files stored by an App or third party service.
 
-It also benefits such as;
+This package providers benefits such as;
 
 - Improved upload time (uploading directly to google cloud storage)
 - Minimised dev time requiring just configuration, setup and use of the code where appropriate.
