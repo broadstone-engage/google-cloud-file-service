@@ -20,7 +20,7 @@
     "upload",
     "download"
   ],
-  "author": "Craig Whiteside <craig@broadstone-engage.com>",
+  "author": "Connor Brady <connor.brady@orka.group>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/broadstone-engage/google-cloud-file-service/issues"
