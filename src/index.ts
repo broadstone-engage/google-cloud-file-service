@@ -93,7 +93,7 @@ export class GoogleCloudFileService {
         const temporaryFile = this.getFile(temporaryFilePath);
 
         const contentType = mime.contentType(temporaryFileName) as string;
-        const permanentFileName = destinationFolder + "/" + this.makeFileName(contentType);
+        const permanentFileName = destinationFolder + '.' + contentType
         const permanentFile = this.getFile(permanentFileName);
 
         const copyResponse = await temporaryFile.copy(permanentFile);
