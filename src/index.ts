@@ -88,13 +88,11 @@ export class GoogleCloudFileService {
         return moveResponse[0];
     }
 
-    async copyTemporaryFile(temporaryFileName: string, destinationFolder: string) : Promise<storage.File> {
-        const temporaryFilePath = this.TEMPORARY_FOLDER + "/" + temporaryFileName;
+    async copyTemporaryFile(temporaryFileName: string, destinationPath: string) : Promise<storage.File> {
+        const temporaryFilePath = this.TEMPORARY_FOLDER + '/' + temporaryFileName;
         const temporaryFile = this.getFile(temporaryFilePath);
 
-        const contentType = mime.contentType(temporaryFileName) as string;
-        const permanentFileName = destinationFolder + '.' + contentType
-        const permanentFile = this.getFile(permanentFileName);
+        const permanentFile = this.getFile(destinationPath);
 
         const copyResponse = await temporaryFile.copy(permanentFile);
 
