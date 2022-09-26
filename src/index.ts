@@ -26,7 +26,7 @@ export class GoogleCloudFileService {
     protected storageInstance : storage.Storage;
     // Storage Bucket
     protected bucket : storage.Bucket;
-    
+
     constructor(bucketName: string, projectId: string, keyFilename: string) {
         this.storageInstance = new storage.Storage({
             projectId,
@@ -35,11 +35,11 @@ export class GoogleCloudFileService {
 
         this.bucket = this.storageInstance.bucket(bucketName);
     }
-    
+
     getFile(fileName: string) : storage.File {
         return this.bucket.file(fileName);
     }
-    
+
     makeFileName(contentType: string) : string {
         const uniqueString = uuid();
         const extension = mime.extension(contentType);
@@ -50,7 +50,7 @@ export class GoogleCloudFileService {
         const response : GetSignedUrlResponse = await file.getSignedUrl(signedUrlConfig);
         return response[0];
     }
-    
+
     async createSignedUpload(contentType: string, expiryTime: number) : Promise<SignedUpload> {
         // Create Temporary File in Temporary Folder
         const temporaryFileName = this.makeFileName(contentType);
@@ -74,7 +74,7 @@ export class GoogleCloudFileService {
 
         return new SignedUpload(temporaryFileName, contentType, expiryTime, signedWriteUrl, signedReadUrl);
     }
-    
+
     async storeTemporaryFile(temporaryFileName: string, destinationFolder: string) : Promise<storage.File> {
         const temporaryFilePath = this.TEMPORARY_FOLDER + "/" + temporaryFileName;
         const temporaryFile = this.getFile(temporaryFilePath);
@@ -82,7 +82,7 @@ export class GoogleCloudFileService {
         const contentType = mime.contentType(temporaryFileName) as string;
         const permanentFileName = destinationFolder + "/" + this.makeFileName(contentType);
         const permanentFile = this.getFile(permanentFileName);
-        
+
         const moveResponse = await temporaryFile.move(permanentFile);
 
         return moveResponse[0];
@@ -104,6 +104,14 @@ export class GoogleCloudFileService {
 
         await file.delete({
             ignoreNotFound: true
-        })
+        });
+    }
+
+    getBucket(): storage.Bucket {
+        return this.bucket;
+    }
+
+    getClient(): storage.Storage {
+        return this.storageInstance;
     }
 }
